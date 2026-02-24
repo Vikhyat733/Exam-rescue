@@ -140,7 +140,8 @@ function buildSidebar(activeHref) {
         <button class="btn btn-ghost btn-sm" style="width:100%" onclick="openSettings()">⚙️ API Keys & Settings</button>
       </div>
     </div>
-  `; \r\n  // Re-apply theme buttons state
+   `;
+  // Re-apply theme buttons state
   setTheme(getTheme());
 
   // ——— MOBILE HAMBURGER ———
@@ -375,3 +376,4 @@ function initPage(activeHref) {
     setTimeout(() => showProfileModal(false), 500);
   }
 }
+
