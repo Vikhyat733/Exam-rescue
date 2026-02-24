@@ -140,9 +140,48 @@ function buildSidebar(activeHref) {
         <button class="btn btn-ghost btn-sm" style="width:100%" onclick="openSettings()">⚙️ API Keys & Settings</button>
       </div>
     </div>
-  `;
-  // Re-apply theme buttons state
+  `; \r\n  // Re-apply theme buttons state
   setTheme(getTheme());
+
+  // ——— MOBILE HAMBURGER ———
+  // Inject hamburger button + overlay once
+  if (!document.getElementById('hamburger-btn')) {
+    const btn = document.createElement('button');
+    btn.id = 'hamburger-btn';
+    btn.className = 'hamburger-btn';
+    btn.setAttribute('aria-label', 'Toggle navigation');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    btn.onclick = toggleMobileSidebar;
+    document.body.appendChild(btn);
+
+    const overlay = document.createElement('div');
+    overlay.id = 'sidebar-overlay';
+    overlay.className = 'sidebar-overlay';
+    overlay.onclick = closeMobileSidebar;
+    document.body.appendChild(overlay);
+  }
+}
+
+// ——— MOBILE SIDEBAR TOGGLE ———
+function toggleMobileSidebar() {
+  const sidebar = document.getElementById('sidebar');
+  const btn = document.getElementById('hamburger-btn');
+  const overlay = document.getElementById('sidebar-overlay');
+  const isOpen = sidebar.classList.contains('mobile-open');
+  if (isOpen) {
+    closeMobileSidebar();
+  } else {
+    sidebar.classList.add('mobile-open');
+    btn.classList.add('open');
+    overlay.classList.add('visible');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeMobileSidebar() {
+  document.getElementById('sidebar')?.classList.remove('mobile-open');
+  document.getElementById('hamburger-btn')?.classList.remove('open');
+  document.getElementById('sidebar-overlay')?.classList.remove('visible');
+  document.body.style.overflow = '';
 }
 
 // ===== SETTINGS PANEL =====
